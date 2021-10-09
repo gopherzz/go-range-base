@@ -25,10 +25,6 @@ func (r *Range) For(f RangeFunc) {
 	}
 }
 
-func (r *Range) Front() (Range, error) {
-	return Range{from: r.from, to: r.to, current: r.from}, nil
-}
-
 func (r *Range) Cur() int32 {
 	return r.current
 }
