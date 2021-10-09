@@ -1,4 +1,4 @@
-package main
+package gorange
 
 import (
 	"errors"
