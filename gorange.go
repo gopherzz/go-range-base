@@ -1,9 +1,5 @@
 package gorange
 
-import (
-	"errors"
-)
-
 type Range struct {
 	from    int32
 	to      int32
@@ -29,10 +25,25 @@ func (r *Range) For(f RangeFunc) {
 	}
 }
 
-func (r *Range) Next() (int32, error) {
+func (r *Range) Front() (Range, error) {
+	return Range{from: r.from, to: r.to, current: r.from}, nil
+}
+
+func (r *Range) Cur() int32 {
+	return r.current
+}
+
+func (r *Range) IsLast() bool {
 	if r.current >= r.to {
-		return r.current, errors.New("Out of range!")
+		return true
+	}
+	return false
+}
+
+func (r *Range) Next() Range {
+	if r.IsLast() {
+		return Range{from: r.from, to: r.to, current: r.from}
 	}
 	r.current++
-	return r.current, nil
+	return Range{from: r.from, to: r.to, current: r.current}
 }
