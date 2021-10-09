@@ -8,10 +8,12 @@ type Range struct {
 
 type RangeFunc func(int32)
 
+// Set Range Start value
 func (r Range) From(from int32) Range {
 	return Range{from: from, current: from}
 }
 
+// Set Range End value
 func (from Range) To(to int32) Range {
 	return Range{
 		from: from.from,
@@ -19,14 +21,20 @@ func (from Range) To(to int32) Range {
 	}
 }
 
+// Iterate Range, and run function 'f' with current range value
 func (r *Range) For(f RangeFunc) {
-	for i := r.from; i < r.to; i++ {
-		f(i)
+	for i := r; !i.IsLast(); i.Next() {
+		f(i.Cur())
 	}
 }
 
-func (r *Range) Cur() int32 {
-	return r.current
+// Return Copy of Range with changed cursor position
+func (r *Range) Next() Range {
+	if r.IsLast() {
+		return *r
+	}
+	r.current++
+	return *r
 }
 
 func (r *Range) IsLast() bool {
@@ -36,10 +44,6 @@ func (r *Range) IsLast() bool {
 	return false
 }
 
-func (r *Range) Next() Range {
-	if r.IsLast() {
-		return Range{from: r.from, to: r.to, current: r.from}
-	}
-	r.current++
-	return Range{from: r.from, to: r.to, current: r.current}
+func (r *Range) Cur() int32 {
+	return r.current
 }
