@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-  rng := gorng.Range{}.From(1).To(100)
+  rng := gorng.New(0, 100)
   rng.For(func(i int32) { fmt.Println(i) })
 }
 ```
