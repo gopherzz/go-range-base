@@ -8,6 +8,10 @@ type Range struct {
 
 type RangeFunc func(int32)
 
+func New(from, to int32) Range {
+	return Range{from: from, to: to}
+}
+
 // Set Range Start value
 func (r Range) From(from int32) Range {
 	return Range{from: from, current: from}
