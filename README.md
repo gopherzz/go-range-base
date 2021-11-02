@@ -27,12 +27,12 @@ import (
 
 func main() {
   rng := gorng.Range{}.From(0).To(3)
-	var a int32
-	for i := rng; !i.IsLast(); i.Next() {
-		a++
-	}
-	if a != 3 {
-		t.Errorf("Excepted a == 3, get a = %d", a)
-	}
+  var a int32
+  for i := rng; !i.IsLast(); i.Next() {
+  	a++
+  }
+  if a != 3 {
+  	t.Errorf("Excepted a == 3, get a = %d", a)
+  }
 }
 ```
